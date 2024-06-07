@@ -1,5 +1,5 @@
 {
-  "name": "odoo-node-issabel",
+  "name": "odoo-issabel-int",
   "module": "index.ts",
   "type": "module",
   "scripts": {

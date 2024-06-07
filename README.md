@@ -14,5 +14,5 @@ bun install
 - Finally run the project:
 
 ```bash
-bun run index.ts
+bun run start
 ```
