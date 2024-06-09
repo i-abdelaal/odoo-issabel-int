@@ -11,9 +11,9 @@ const getContactById = async (id: number | string): Promise<OdooContact[]> => {
   return await odoo.searchRead("res.partner", { id }, allowedContactFields);
 };
 
-const getContactsByPhoneNumber = async (number: string): Promise<OdooContact[]> => {
-  number = number.trim();
-  return await odoo.searchRead("res.partner", ["|", "|", ["mobile", "ilike", number], ["phone", "ilike", number], ["x_telephone", "ilike", number]], allowedContactFields);
+const getContactsByPhoneNumber = async (phone: string): Promise<OdooContact[]> => {
+  phone = phone.trim();
+  return await odoo.searchRead("res.partner", ["|", "|", ["mobile", "ilike", phone], ["phone", "ilike", phone], ["x_telephone", "ilike", phone]], allowedContactFields);
 };
 
 export { getAllContacts, getContactById, getContactsByPhoneNumber };

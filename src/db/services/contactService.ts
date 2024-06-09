@@ -4,11 +4,11 @@ import { mapContactType } from "../helpers";
 
 export type ContactQuery = {
   id: string;
-  number: string;
+  phone: string;
 };
 
-export const getContacts = async ({ id, number }: ContactQuery): Promise<SalesBuzzContact[] | SalesBuzzContact> => {
+export const getContacts = async ({ id, phone }: ContactQuery): Promise<SalesBuzzContact[] | SalesBuzzContact> => {
   if (id) return mapContactType(await getContactById(id));
-  if (number) return mapContactType(await getContactsByPhoneNumber(number));
+  if (phone) return mapContactType(await getContactsByPhoneNumber(phone));
   return mapContactType(await getAllContacts());
 };
