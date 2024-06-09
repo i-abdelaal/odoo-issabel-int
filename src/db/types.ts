@@ -5,6 +5,7 @@ export type SalesBuzzContact = {
   apellido?: string;
   first_name?: string;
   last_name?: string;
+  phone?: string;
   telefono?: string;
   phone_2?: string;
   mobile?: string;

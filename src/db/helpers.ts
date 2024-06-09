@@ -12,6 +12,7 @@ const mapContactType = (contacts: OdooContact[]): SalesBuzzContact[] => {
       apellido: lastName,
       first_name: firstName,
       last_name: lastName,
+      phone: contact.phone,
       telefono: contact.x_telephone,
       phone_2: contact.phone,
       mobile: contact.mobile,
