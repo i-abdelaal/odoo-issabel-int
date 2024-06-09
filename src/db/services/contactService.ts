@@ -8,7 +8,7 @@ export type ContactQuery = {
 };
 
 export const getContacts = async ({ id, phone }: ContactQuery): Promise<SalesBuzzContact[] | SalesBuzzContact> => {
-  if (id) return mapContactType(await getContactById(id));
+  if (id) return mapContactType(await getContactById(id))[0] || {};
   if (phone) return mapContactType(await getContactsByPhoneNumber(phone));
   return mapContactType(await getAllContacts());
 };
