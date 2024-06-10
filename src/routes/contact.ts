@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { getContacts, type ContactQuery } from "../db/services/contactService";
+import { getContacts, type ContactQuery } from "../controllers/contactController";
 
 const contact = new Hono().basePath("/contact");
 

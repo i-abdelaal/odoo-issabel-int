@@ -1,14 +1,19 @@
-import { type SalesBuzzContact } from "../types";
-import { getAllContacts, getContactById, getContactsByPhoneNumber } from "../../odoo/contact";
-import { mapContactType } from "../helpers";
+import { odoo } from "..";
+import type { DBContact } from "../models/dbContactModel";
 
-export type ContactQuery = {
-  id: string;
-  phone: string;
+const allowedContactFields: string[] = ["id", "name", "mobile", "phone", "x_telephone", "street", "street2", "city", "email", "x_CustomerID", "x_Route", "x_compound", "x_CustomerStatus", "x_Day"];
+
+const getAllContacts = async (): Promise<DBContact[]> => {
+  return await odoo.searchRead("res.partner", {}, [], { order: "id" });
 };
 
-export const getContacts = async ({ id, phone }: ContactQuery): Promise<SalesBuzzContact[] | SalesBuzzContact> => {
-  if (id) return mapContactType(await getContactById(id))[0] || {};
-  if (phone) return mapContactType(await getContactsByPhoneNumber(phone));
-  return mapContactType(await getAllContacts());
+const getContactById = async (id: number | string): Promise<DBContact[]> => {
+  return await odoo.searchRead("res.partner", { id }, allowedContactFields);
 };
+
+const getContactsByPhoneNumber = async (phone: string): Promise<DBContact[]> => {
+  phone = phone.trim();
+  return await odoo.searchRead("res.partner", ["|", "|", ["mobile", "ilike", phone], ["phone", "ilike", phone], ["x_telephone", "ilike", phone]], allowedContactFields);
+};
+
+export { getAllContacts, getContactById, getContactsByPhoneNumber };

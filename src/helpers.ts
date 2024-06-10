@@ -1,12 +1,13 @@
-import type { OdooContact, SalesBuzzContact } from "./types";
+import type { Contact } from "./models/contactModel";
+import type { DBContact } from "./db/models/dbContactModel";
 
-const mapContactType = (contacts: OdooContact[]): SalesBuzzContact[] => {
+const mapContactType = (contacts: DBContact[]): Contact[] => {
   return contacts.map((contact) => {
     const fullName: string[] = contact.name?.split(" ") || [];
     const firstName = fullName[0];
     const lastName = fullName.slice(1).join(" ");
     const address = `${contact.city || ""} ${contact.street || ""} ${contact.street2 || ""}`.trim();
-    const mappedContact: SalesBuzzContact = {
+    const mappedContact: Contact = {
       id: contact.id,
       name: contact.name,
       apellido: lastName,
